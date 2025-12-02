@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WolnaPrzestrzeń Utylizacja — Wywóz mebli i opróżnianie mieszkań</title>
+
+<style>
+:root{
+--bg:#f7f9fb;
+--card:#ffffff;
+--accent:#0b72ff;
+--muted:#6b7280;
+--radius:14px;
+--shadow: 0 6px 18px rgba(12, 20, 50, 0.06);
+--container:1200px;
+font-family: Inter, ui-sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#eef3fb);color:#0f172a;transition:background 0.3s,color 0.3s}
+
+body.dark{background:#0c111b;color:#e5e7eb}
+body.dark .card{background:#111827;color:#e5e7eb}
+body.dark .service{background:#1f2937;border-color:#374151}
+body.dark .about{background:#1f2937;border-color:#374151}
+body.dark .gallery{background:#1f2937;border-color:#374151}
+body.dark footer{color:#9ca3af}
+
+.wrap{max-width:var(--container);margin:32px auto;padding:24px}
+
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:0.3s}
+
+header{display:flex;align-items:center;gap:18px;padding:26px}
+h1{margin:0;font-size:22px}
+p.lead{margin:6px 0 0;color:var(--muted)}
+body.dark p.lead{color:#9ca3af}
+
+.grid{display:grid;grid-template-columns:1fr 360px;gap:20px;padding:22px}
+@media (max-width:880px){.grid{grid-template-columns:1fr;}.header-cta{margin-top:12px}}
+
+.services{padding:10px 6px}
+.service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:540px){.service-list{grid-template-columns:1fr}}
+
+.service{background:#fbfdff;border-radius:10px;padding:12px;border:1px solid #eef6ff;transition:0.3s}
+.service:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,0.08)}
+body.dark .service{background:#1f2937;border-color:#29323f}
+
+.service h3{margin:0;font-size:15px}
+.service p{margin:6px 0 0;color:var(--muted);font-size:13px}
+body.dark .service p{color:#9ca3af}
+
+.about{margin-top:14px;padding:14px;background:linear-gradient(180deg,#ffffff,#fbfdff);border-radius:10px;border:1px solid #f1f7ff;transition:0.3s}
+body.dark .about{background:#1f2937;border-color:#29323f}
+.about p{margin:0;color:var(--muted)}
+body.dark .about p{color:#9ca3af}
+
+.contact{padding:18px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;border:0;background:var(--accent);color:white;text-decoration:none;font-weight:600;cursor:pointer}
+.btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(11,114,255,0.12)}
+
+footer{padding:20px;text-align:center;color:var(--muted);font-size:13px;transition:0.3s}
+
+/* GALERIA */
+.gallery {margin-top: 24px;padding: 14px;background: linear-gradient(180deg,#ffffff,#fbfdff);border-radius: 12px;border: 1px solid #f1f7ff;transition:0.3s}
+body.dark .gallery{background:#1f2937;border-color:#29323f}
+
+.gallery-grid {margin-top: 14px;display: grid;grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));gap: 12px}
+
+.gallery-grid img {width: 100%;height: 130px;object-fit: cover;border-radius: 10px;box-shadow: 0 4px 12px rgba(0,0,0,0.06);transition: transform 0.25s ease, box-shadow 0.25s ease;cursor: pointer;opacity:0;animation:fadeIn 0.6s forwards}
+
+@keyframes fadeIn {to{opacity:1}}
+
+.gallery-grid img:hover {transform: scale(1.04);box-shadow: 0 8px 18px rgba(0,0,0,0.12)}
+
+/* LIGHTBOX */
+.lightbox {display: none;position: fixed;inset: 0;background: rgba(0,0,0,0.75);backdrop-filter: blur(2px);align-items: center;justify-content: center;padding: 20px;z-index: 9999;animation:fadeIn 0.3s}
+
+.lightbox-img {max-width: 90%;max-height: 90%;border-radius: 12px;box-shadow: 0 0 22px rgba(0,0,0,0.35);transition:0.3s}
+
+.lightbox-close {position: absolute;top: 20px;right: 30px;font-size: 38px;color: #fff;cursor: pointer;user-select: none}
+
+/* ARROWS */
+.arrow {position:absolute;top:50%;transform:translateY(-50%);font-size:48px;color:white;cursor:pointer;user-select:none;padding:10px}
+.arrow:hover{color:#dbeafe}
+.arrow.left{left:40px}
+.arrow.right{right:40px}
+
+/* DARK MODE BUTTON */
+.theme-toggle{position:fixed;bottom:22px;right:22px;padding:12px 16px;background:#0b72ff;color:white;border-radius:10px;cursor:pointer;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+/* Floating call button */
+.floating-call{
+position:fixed;
+right:22px;
+bottom:22px;
+background:#0b72ff;
+color:#fff;
+width:62px;height:62px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:28px;
+box-shadow:0 8px 20px rgba(0,0,0,0.18);
+z-index:9999;
+text-decoration:none;
+transition:transform .2s ease, box-shadow .2s ease;
+}
+.floating-call:hover{
+transform:scale(1.08);
+box-shadow:0 12px 26px rgba(0,0,0,0.26);
+}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+<div class="card">
+<header style="display:flex;align-items:center;gap:18px;padding:26px;position:relative">
+<img src="logo.jpg" alt="Logo WolnaPrzestrzeń" style="width:110px;height:auto;border-radius:12px" />
+<div>
+<h1>WolnaPrzestrzeń Utylizacja</h1>
+<p class="lead">Wywóz mebli • Opróżnianie mieszkań • Rozbiórki pieców kaflowych • Transporty lekkie • Przeprowadzki (opcjonalnie)</p>
+</div>
+<div style="margin-left:auto;text-align:right" class="header-cta">
+<div class="pill">Szybki wywóz • Uczciwe ceny</div>
+<div style="margin-top:8px;display:flex;gap:10px;justify-content:flex-end">
+<a class="btn" href="tel:+48605863224">📞 Zadzwoń</a>
+<a class="btn secondary" href="mailto:wolnaprzestrzenpl@gmail.com">✉️ Napisz</a>
+</div>
+</div>
+</header>
+
+<!-- Floating call button -->
+<a href="tel:+48605863224" class="floating-call">📞</a>
+
+<div class="grid">
+<section>
+<div class="services">
+<h2>Nasze usługi</h2>
+<div class="service-list">
+<div class="service"><h3>Wywóz mebli</h3><p>Szybki demontaż i wywóz.</p></div>
+<div class="service"><h3>Opróżnianie mieszkań</h3><p>Kompletne opróżnianie.</p></div>
+<div class="service"><h3>Rozbiórki pieców</h3><p>Bezpieczne i fachowe.</p></div>
+<div class="service"><h3>Transporty lekkie</h3><p>Małe ładunki.</p></div>
+<div class="service"><h3>Przeprowadzki</h3><p>Szybkie przenosiny.</p></div>
+<div class="service"><h3>Utylizacja</h3><p>Legalna + protokół.</p></div>
+</div>
+
+<div class="about">
+<strong>Dlaczego my?</strong>
+<p>Szybko, tanio, porządnie.</p>
+</div>
+
+<div class="gallery">
+<h2>Galeria realizacji</h2>
+<div class="gallery-grid">
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+<img src="foto4.jpg">
+<img src="foto5.jpg">
+<img src="foto6.jpg">
+</div>
+</div>
+
+<div id="lightbox" class="lightbox">
+<span class="lightbox-close">&times;</span>
+<span class="arrow left">&#10094;</span>
+<img class="lightbox-img" src="">
+<span class="arrow right">&#10095;</span>
+</div>
+
+</div>
+</section>
+
+<aside class="contact">
+<h3>Kontakt</h3>
+<p>📞 <a href="tel:+48605863224">+48 605 863 224</a></p>
+<p>✉️ <a href="mailto:wolnaprzestrzenpl@gmail.com">wolnaprzestrzenpl@gmail.com</a></p>
+</aside>
+</div>
+
+<footer>
+© <span id="year"></span> WolnaPrzestrzeń Utylizacja
+</footer>
+</div>
+</main>
+
+<div class="theme-toggle" id="toggleTheme">Tryb ciemny</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const toggle = document.getElementById("toggleTheme");
+toggle.onclick = ()=>{
+document.body.classList.toggle("dark");
+toggle.textContent = document.body.classList.contains("dark") ? "Tryb jasny" : "Tryb ciemny";
+};
+
+const imgs = document.querySelectorAll('.gallery-grid img');
+const lightbox = document.getElementById('lightbox');
+const lightImg = document.querySelector('.lightbox-img');
+const closeBtn = document.querySelector('.lightbox-close');
+const left = document.querySelector('.arrow.left');
+const right = document.querySelector('.arrow.right');
+
+let index = 0;
+
+function openLightbox(i){
+index = i;
+lightImg.src = imgs[i].src;
+lightbox.style.display = 'flex';
+}
+
+imgs.forEach((img,i)=>{
+img.onclick = ()=> openLightbox(i);
+});
+
+closeBtn.onclick = ()=> lightbox.style.display = 'none';
+lightbox.onclick = e=>{ if(e.target===lightbox) lightbox.style.display='none' };
+
+left.onclick = e=>{
+e.stopPropagation();
+index = (index - 1 + imgs.length) % imgs.length;
+lightImg.src = imgs[index].src;
+};
+
+right.onclick = e=>{
+e.stopPropagation();
+index = (index + 1) % imgs.length;
+lightImg.src = imgs[index].src;
+};
+</script>
+</body>
+</html>
